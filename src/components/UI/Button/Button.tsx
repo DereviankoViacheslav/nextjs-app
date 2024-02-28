@@ -17,8 +17,9 @@ export default function Button({
   href,
   theme = 'primary',
 }: Props) {
-  const classes = `inline-block py-[20px] px-[30px] rounded text-[--button-text-color-${theme}] bg-[--button-color-${theme}]`;
+  // const classes = `inline-block py-[20px] px-[30px] rounded text-[--button-text-color-${theme}] bg-[--button-color-${theme}]`;
   // const classes = `inline-block p-[20px] rounded text-[--button-text-color-secondary] bg-[--button-color-secondary]`;
+  const classes = `inline-block p-[20px] rounded text-[--button-text-color-primary] bg-[--button-color-primary]`;
 
   if (href) {
     return (

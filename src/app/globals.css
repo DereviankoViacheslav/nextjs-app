@@ -5,7 +5,7 @@
 :root {
   --bg-color-primary: #ffffff;
   --bg-color-secondary: #f6f7ff;
-  /* --bg-color-secondary: #f15454; */
+  /* --bg-color-secondary: #a5dbfa; */
   --link-hover-color: #2c36f2;
 
   --text-color-primary: #707c87;
@@ -17,9 +17,19 @@
   --button-color-primary: #2c36f2;
   --button-color-secondary: #f6f7ff;
 
+  --input-border-color: #c1c2ca;
+
   --padding-x: 6rem;
 }
 
 body {
   color: var(--text-color-primary);
 }
+
+/* ::-webkit-calendar-picker-indicator {
+  color: transparent;
+  opacity: 1;
+  background: url(../../public/icon-date-picker.svg)
+    no-repeat center;
+  background-size: contain;
+} */
