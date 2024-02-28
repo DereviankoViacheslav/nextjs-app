@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation/Navigation';
 
 export default function Header() {
   return (
-    <header className="flex gap-x-32 items-center py-10 px-[--padding-x] first-letter:uppercase bg-[--bg-color]">
+    <header className="flex gap-x-32 items-center py-10 px-[--padding-x] first-letter:uppercase bg-[--bg-color-secondary]">
       <Logo />
       <Navigation />
       <Link href="/personal-account" className="flex ml-auto">

@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #f6f7ff;
+  --bg-color-primary: #ffffff;
+  --bg-color-secondary: #f6f7ff;
+  /* --bg-color-secondary: #f15454; */
   --link-hover-color: #2c36f2;
 
   --text-color-primary: #707c87;

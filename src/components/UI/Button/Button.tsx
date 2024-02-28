@@ -12,29 +12,24 @@ type Props = {
 
 export default function Button({
   children,
-  disabled,
+  disabled = false,
   onClick,
   href,
   theme = 'primary',
 }: Props) {
-  const classes = `inline-block p-[20px] rounded text-[--button-text-color-${theme}] bg-[--button-color-${theme}]`;
+  const classes = `inline-block py-[20px] px-[30px] rounded text-[--button-text-color-${theme}] bg-[--button-color-${theme}]`;
+  // const classes = `inline-block p-[20px] rounded text-[--button-text-color-secondary] bg-[--button-color-secondary]`;
 
   if (href) {
     return (
-      <Link className={`${classes}`} href={href}>
+      <Link className={classes} href={href}>
         {children}
       </Link>
     );
   }
 
-  const onClickAction = (e: SyntheticEvent) => {
-    if (onClick && !disabled) {
-      return onClick(e);
-    }
-  };
-
   return (
-    <button className={`${classes}`} onClick={onClickAction}>
+    <button className={`${classes}`} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

@@ -3,7 +3,7 @@ import Button from '@/components/UI/Button/Button';
 
 export default function Home() {
   return (
-    <section>
+    <section className="bg-[--bg-color-primary]">
       <div className="flex justify-between max-w-[866px] mx-auto py-[85px]">
         <div>
           <h2 className="mb-[25px] font-bold text-[40px] text-[--text-color-secondary]">

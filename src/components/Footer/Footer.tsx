@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation/Navigation';
 
 export default function Footer() {
   return (
-    <footer className="flex justify-between gap-x-32 py-16 px-[--padding-x] bg-[--bg-color] text-xs">
+    <footer className="flex justify-between gap-x-32 py-16 px-[--padding-x] bg-[--bg-color-secondary] text-xs">
       <div>
         <Logo />
         <div className="flex flex-col mt-2">
