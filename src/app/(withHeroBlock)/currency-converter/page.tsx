@@ -1,5 +1,6 @@
 import CurrencyConverter from '@/components/CurrencyConverter/CurrencyConverter';
 import ConversionHistory from '@/components/ConversionHistory/ConversionHistory';
+import { fetchData as fd } from '@/api/fetchData';
 
 interface RequestData {
   result: string;
@@ -45,13 +46,14 @@ export type Data = {
   sellCurrency: string;
   buyCurrency: string;
   buyAmount: number;
+  fetchData: (date: Date, currency: string) => {};
 };
 
 const countAmount = (sellAmount: number, buyAmount: number) => {
   return +(sellAmount * buyAmount).toFixed(2);
 };
 
-const fetchData = async (): Promise<Data> => {
+const getData = async (): Promise<Data> => {
   // const res = await fetch(
   //   `https://v6.exchangerate-api.com/v6/211274c39d35699b2bc86458/history/${currentCurrency}/${year}/${month}/${day}`,
   // );
@@ -84,6 +86,7 @@ const fetchData = async (): Promise<Data> => {
   );
 
   return {
+    fetchData: fd,
     currenciesRate,
     currencyNames,
     sellCurrency,
@@ -99,7 +102,8 @@ export default async function СurrencyСonverterPage() {
     sellCurrency,
     buyCurrency,
     buyAmount,
-  } = await fetchData();
+    fetchData,
+  } = await getData();
 
   return (
     <>
@@ -111,6 +115,7 @@ export default async function СurrencyСonverterPage() {
             sellCurrency={sellCurrency}
             buyCurrency={buyCurrency}
             buyAmount={buyAmount}
+            fetchData={fetchData}
           />
           {/* <CurrencyConverter data={data} /> */}
         </div>

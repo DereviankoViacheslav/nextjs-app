@@ -7,6 +7,7 @@ import Input from '@/components/Input/Input';
 import Select from '@/components/Select/Select';
 import { State, useAppStore } from '@/stores/app.store';
 import { Data } from '@/app/(withHeroBlock)/currency-converter/page';
+// import { fetchData } from '@/api/fetchData';
 
 export default function СurrencyСonverter(data: Data) {
   const {
@@ -51,6 +52,8 @@ export default function СurrencyСonverter(data: Data) {
     setCurrencyNames,
   ]);
 
+  data.fetchData(selectedDate, sellCurrency);
+
   const minDate = new Date(selectedDate.getTime() - 60 * 60 * 24 * 6 * 1000);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -61,9 +64,8 @@ export default function СurrencyСonverter(data: Data) {
     const sellValue = +e.target.value;
     setSellAmount(sellValue);
 
-    const buyValue = +(sellAmount * currenciesRate[buyCurrency].rate).toFixed(
-      2,
-    );
+    const buyValue = +(sellValue * currenciesRate[buyCurrency].rate).toFixed(2);
+    debugger;
     setBuyAmount(buyValue);
   };
 

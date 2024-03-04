@@ -80,9 +80,17 @@ export const useAppStore = create<State>((set, get) => ({
   setCurrenciesRate: (rates: CurrenciesRate) => set({ currenciesRate: rates }),
   setCurrencyNames: (names: string[]) => set({ currencyNames: names }),
   setSelectedDate: (date: Date) => set({ selectedDate: date }),
-  setSellAmount: (amount: number) => set(() => ({ sellAmount: amount })),
+  setSellAmount: (amount: number) =>
+    set(() => {
+      debugger;
+      return { sellAmount: amount };
+    }),
   setSellCurrency: (currency: string) => set({ sellCurrency: currency }),
-  setBuyAmount: (amount: number) => set({ buyAmount: amount }),
+  setBuyAmount: (amount: number) =>
+    set(() => {
+      debugger;
+      return { buyAmount: amount };
+    }),
   setBuyCurrency: (currency: string) => set({ buyCurrency: currency }),
   // fetchData: async () => {
   //   // const state = get();
