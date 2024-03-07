@@ -3,27 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --bg-color-primary: #ffffff;
-  --bg-color-secondary: #f6f7ff;
-  /* --bg-color-secondary: #a5dbfa; */
-  --link-hover-color: #2c36f2;
+    --bg-color-primary: #ffffff;
+    --bg-color-secondary: #f6f7ff;
+    --link-hover-color: #2c36f2;
 
-  --text-color-primary: #707c87;
-  --text-color-secondary: #1f1e25;
-  --text-color-light: #f6f7ff;
+    --text-color-primary: #707c87;
+    --text-color-secondary: #1f1e25;
+    --text-color-light: #f6f7ff;
 
-  --button-text-color-primary: #f6f7ff;
-  --button-text-color-secondary: #707c87;
-  --button-color-primary: #2c36f2;
-  --button-color-secondary: #f6f7ff;
+    --button-text-color-primary: #f6f7ff;
+    --button-text-color-secondary: #707c87;
+    --button-color-primary: #2c36f2;
+    --button-color-secondary: #f6f7ff;
 
-  --input-border-color: #c1c2ca;
+    --input-border-color: #c1c2ca;
 
-  --padding-x: 6rem;
+    --padding-x: 6rem;
 }
 
 body {
-  color: var(--text-color-primary);
+    color: var(--text-color-primary);
 }
 
 /* ::-webkit-calendar-picker-indicator {

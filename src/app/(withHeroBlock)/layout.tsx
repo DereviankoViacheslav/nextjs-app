@@ -1,14 +1,14 @@
 import Hero from '@/components/Hero/Hero';
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <Hero />
-      {children}
-    </>
-  );
+    return (
+        <>
+            <Hero />
+            {children}
+        </>
+    );
 }
