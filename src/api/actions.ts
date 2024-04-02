@@ -1,5 +1,4 @@
 'use server';
-import { CurrencyRates } from '@/stores/app.store';
 
 interface RequestData {
     result: string;
@@ -26,6 +25,10 @@ const currencyAvailableNames = [
 
 const defaultCurrencyName = 'USD';
 
+export type CurrencyRates = {
+    [currency: string]: { name: string; rate: number };
+};
+
 export type Data = {
     currencyRates: CurrencyRates;
     currencyNames: string[];
@@ -45,13 +48,19 @@ export const fetchData = async (
 
     const url = `https://v6.exchangerate-api.com/v6/6028cce062c80d51f6e6f10c/latest/UAH`;
 
-    const res = await fetch(url, {
-        cache: 'no-cache',
+    // const res: Response = await fetch(url, {
+    //     cache: 'no-cache',
+    // });
+
+    const restest: Response = await new Promise(async (res, rej) => {
+        const data = await fetch(url, { cache: 'no-cache' });
+        setTimeout(() => {
+            return res(data);
+        }, 3000);
     });
 
-    if (!res.ok) return new Error('Failed to fetch data');
-
-    const data: RequestData = await res.json();
+    const data: RequestData = await restest.json();
+    if (data.result !== 'success') return new Error('Failed to fetch data');
 
     const currencies: [string, number][] = Object.entries(
         data.conversion_rates,

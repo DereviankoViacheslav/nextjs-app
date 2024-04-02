@@ -1,54 +1,34 @@
 'use client';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Image from 'next/image';
 import formatDate from '@/utils/formatDate';
 import { useAppStore } from '@/stores/app.store';
-import { fetchData } from '@/api/actions';
 import Button from '@/components/UI/Button/Button';
 import Input from '@/components/Input/Input';
 import Select from '@/components/Select/Select';
+import { Data, fetchData } from '@/api/actions';
 
-export default function СurrencyСonverter() {
-    const {
-        currencyNames,
-        selectedDate,
-        fetchDataStore,
-        isLoading,
-        currencyRates,
-        updateStore,
-    } = useAppStore((state) => state);
+export default function СurrencyСonverter({
+    data,
+    date,
+}: {
+    data: Data;
+    date: Date;
+}) {
+    const { updateStore } = useAppStore((state) => state);
+
+    const { currencyNames, currencyRates, sellCurrency, buyCurrency } = data;
+
     const [formValues, setFormValues] = useState({
         sellAmount: 0,
         buyAmount: 0,
-        sellCurrency: '',
-        buyCurrency: '',
-        selectedDate: new Date(),
-        currencyRate: 1.5,
+        sellCurrency,
+        buyCurrency,
+        date,
+        currencyRate: currencyRates[buyCurrency].rate,
     });
 
-    useEffect(() => {
-        (async () => {
-            const data = await fetchDataStore();
-            if (data instanceof Error) {
-                throw new Error(data.message);
-            }
-            setFormValues({
-                ...formValues,
-                sellCurrency: data.sellCurrency,
-                buyCurrency: data.buyCurrency,
-                currencyRate: data.currencyRates[data.buyCurrency].rate,
-            });
-        })();
-    }, []);
-
-    if (isLoading)
-        return (
-            <div className="flex justify-center items-center min-h-[318px] bg-[--bg-color-primary] text-3xl">
-                Data is loading...
-            </div>
-        );
-
-    const minDate = new Date(selectedDate.getTime() - 60 * 60 * 24 * 6 * 1000);
+    const minDate = new Date(date.getTime() - 60 * 60 * 24 * 6 * 1000);
 
     const onChangeAmountInput = (e: ChangeEvent<HTMLInputElement>) => {
         let sellAmount = 0;
@@ -80,30 +60,25 @@ export default function СurrencyСonverter() {
         });
     };
 
-    const onChangeDateInput = (e: ChangeEvent<HTMLInputElement>) => {
-        const date = e.target.value;
+    const onChangeDateInput = async (e: ChangeEvent<HTMLInputElement>) => {
+        const date = new Date(e.target.value);
+        const data = await fetchData(date);
+
+        if (data instanceof Error) {
+            throw new Error(data.message);
+        }
+        const { currencyRates, buyCurrency } = data;
+
         setFormValues({
             ...formValues,
-            selectedDate: new Date(date),
+            currencyRate: currencyRates[buyCurrency].rate,
+            date,
         });
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const {
-            sellAmount,
-            buyAmount,
-            sellCurrency,
-            buyCurrency,
-            selectedDate,
-        } = formValues;
-        updateStore(
-            sellAmount,
-            buyAmount,
-            sellCurrency,
-            buyCurrency,
-            selectedDate,
-        );
+        updateStore(formValues);
     };
 
     return (
@@ -129,9 +104,9 @@ export default function СurrencyСonverter() {
                     <Input
                         name="date"
                         inputType="date"
-                        value={formatDate(formValues.selectedDate)}
+                        value={formatDate(formValues.date)}
                         min={formatDate(minDate)}
-                        max={formatDate(formValues.selectedDate)}
+                        max={formatDate(formValues.date)}
                         onChange={onChangeDateInput}
                     />
                 </div>

@@ -16,16 +16,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
+    modal,
 }: Readonly<{
     children: React.ReactNode;
+    modal: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body className={`flex flex-col h-screen ${font.className}`}>
+        <html lang="en" suppressHydrationWarning className='h-full'>
+            <body className={`flex flex-col min-h-full ${font.className}`}>
                 <Header />
                 <main className="grow">{children}</main>
                 <Footer />
             </body>
+            {modal}
         </html>
     );
 }
